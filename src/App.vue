@@ -15,10 +15,8 @@ import HelloWorld from "./components/HelloWorld.vue";
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
-	color: RED;
+	color: green;
 	margin-top: 60px;
-	background: url("111");
-}
-.a {
+	background: url("");
 }
 </style>
