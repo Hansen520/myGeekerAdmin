@@ -28,6 +28,14 @@ module.exports = {
 	 */
 	rules: {
 		// eslint (http://eslint.cn/docs/rules)
-		"no-var": "error" // 要求使用 let 或 const 而不是 var
+
+		// typeScript (https://typescript-eslint.io/rules)
+		"@typescript-eslint/no-inferrable-types": "off", // 可以轻松推断的显式类型可能会增加不必要的冗长
+		"@typescript-eslint/no-explicit-any": "off", // 禁止使用 any 类型
+		"@typescript-eslint/no-namespace": "off", // 禁止使用自定义 TypeScript 模块和命名空间。
+		// vue (https://eslint.vuejs.org/rules)
+		"no-var": "error", // 要求使用 let 或 const 而不是 var
+		"vue/require-default-prop": "off", // 此规则要求为每个 prop 为必填时，必须提供默认值
+		"vue/multi-word-component-names": "off" // 要求组件名称始终为 “-” 链接的单词
 	}
 };
