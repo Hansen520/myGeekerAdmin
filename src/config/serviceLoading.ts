@@ -1,6 +1,6 @@
 import { ElLoading } from "element-plus";
 
-/* 全局请求loading(服务方式调用) */
+/* 全局请求loading(服务方式调用) 感觉适合全屏的请求*/
 let loadingInstance: ReturnType<typeof ElLoading.service>;
 
 const startLoading = () => {

@@ -12,9 +12,20 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 	const viteEnv = wrapperEnv(env);
 
 	return {
+		// base: "/",
+		// alias config
 		resolve: {
 			alias: {
-				"@": resolve(__dirname, "./src")
+				"@": resolve(__dirname, "./src"),
+				"vue-i18n": "vue-i18n/dist/vue-i18n.cjs.js"
+			}
+		},
+		// global css
+		css: {
+			preprocessorOptions: {
+				scss: {
+					additionalData: `@import "@/styles/var.scss";`
+				}
 			}
 		},
 		// server config
@@ -27,8 +38,9 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 			// 代理跨域（mock 不需要配置，这里只是个事列）
 			proxy: {
 				"/api": {
+					target: "http://localhost:7788",
 					// target: "https://www.fastmock.site/mock/f81e8333c1a9276214bcdbc170d9e0a0", // fastmock
-					target: "https://mock.mengxuegu.com/mock/629d727e6163854a32e8307e", // easymock
+					// target: "https://mock.mengxuegu.com/mock/629d727e6163854a32e8307e", // easymock
 					changeOrigin: true,
 					rewrite: path => path.replace(/^\/api/, "")
 				}
@@ -48,5 +60,17 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 			// * name 可以写在 script 标签上
 			VueSetupExtend()
 		]
+		// build: {
+		// 	outDir: "dist",
+		// 	minify: "esbuild",
+		// 	rollupOptions: {
+		// 		output: {
+		// 			// Static resource classification and packaging
+		// 			chunkFileNames: "assets/js/[name]-[hash].js",
+		// 			entryFileNames: "assets/js/[name]-[hash].js",
+		// 			assetFileNames: "assets/[ext]/[name]-[hash].[ext]"
+		// 		}
+		// 	}
+		// }
 	};
 });

@@ -26,14 +26,15 @@ import { ref, reactive, inject, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { Login } from "@/api/interface";
 import { CircleClose, UserFilled } from "@element-plus/icons-vue";
-import type { ElForm, ElMessage } from "element-plus";
+import { ElForm, ElMessage } from "element-plus";
 import { GlobalStore } from "@/store";
-// import { MenuStore } from "@/store/modules/menu";
+import { MenuStore } from "@/store/modules/menu";
 // import { TabsStore } from "@/store/modules/tabs";
 import md5 from "js-md5";
+import { loginApi } from "@/api/modules/login";
 
 const globalStore = GlobalStore();
-// const menuStore = MenuStore();
+const menuStore = MenuStore();
 // const tabStore = TabsStore();
 
 // 定义 formRef(校验规则)
@@ -63,7 +64,14 @@ const login = (formEl: FormInstance | undefined) => {
 					username: loginForm.username,
 					password: md5(loginForm.password)
 				};
-				console.log(requestLoginForm, 59);
+				const res = await loginApi(requestLoginForm);
+				// 存储 token
+				globalStore.setToken(res.data!.access_token);
+				// * 登录成功之后清除上个账号的 menulist 和 tabs 数据
+				menuStore.setMenuList([]);
+				// tabStore.closeMultipleTab();
+				ElMessage.success("登录成功了！");
+				router.push({ name: "home" });
 			} finally {
 				loading.value = false;
 			}
@@ -88,3 +96,7 @@ onMounted(() => {
 	};
 });
 </script>
+
+<style scoped lang="scss">
+@import "../index.scss";
+</style>

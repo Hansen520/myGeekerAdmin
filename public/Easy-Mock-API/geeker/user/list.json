@@ -1,0 +1,102 @@
+{
+  "code": 200,
+  "data": function({
+    _req,
+    Mock
+  }) {
+    let query = _req.body;
+    if (query.username || query.gender || query.idCard || query.email) {
+      return Mock.mock({
+        "datalist|8": [{
+          "id": "@string(number,20)",
+          "username": query.username ? query.username : "@cname",
+          "gender": query.gender ? query.gender : "@integer(1, 2)",
+          "age|15-30": 1,
+          "idCard": query.idCard ? query.idCard : "@id",
+          "email": query.email ? query.email : "@email",
+          "address": "@city(true)",
+          "createTime": "@date @time",
+          "status|1": [0, 1],
+          "avatar": "@image(100x100,@color,@cname)"
+        }],
+        "pageNum": Number(query.pageNum),
+        "pageSize": Number(query.pageSize),
+        "total": 8
+      })
+    } else if (query.pageSize == 25) {
+      return Mock.mock({
+        "datalist|25": [{
+          "id": "@string(number,20)",
+          "username": query.username ? query.username : "@cname",
+          "gender": query.gender ? query.gender : "@integer(1, 2)",
+          "age|15-30": 1,
+          "idCard": query.idCard ? query.idCard : "@id",
+          "email": query.email ? query.email : "@email",
+          "address": "@city(true)",
+          "createTime": "@date @time",
+          "status|1": [0, 1],
+          "avatar": "@image(100x100,@color,@cname)"
+        }],
+        "pageNum": Number(query.pageNum),
+        "pageSize": Number(query.pageSize),
+        "total": 2000
+      })
+    } else if (query.pageSize == 50) {
+      return Mock.mock({
+        "datalist|50": [{
+          "id": "@string(number,20)",
+          "username": query.username ? query.username : "@cname",
+          "gender": query.gender ? query.gender : "@integer(1, 2)",
+          "age|15-30": 1,
+          "idCard": query.idCard ? query.idCard : "@id",
+          "email": query.email ? query.email : "@email",
+          "address": "@city(true)",
+          "createTime": "@date @time",
+          "status|1": [0, 1],
+          "avatar": "@image(100x100,@color,@cname)"
+        }],
+        "pageNum": Number(query.pageNum),
+        "pageSize": Number(query.pageSize),
+        "total": 2000
+      })
+    } else if (query.pageSize == 100) {
+      return Mock.mock({
+        "datalist|100": [{
+          "id": "@string(number,20)",
+          "username": query.username ? query.username : "@cname",
+          "gender": query.gender ? query.gender : "@integer(1, 2)",
+          "age|15-30": 1,
+          "idCard": query.idCard ? query.idCard : "@id",
+          "email": query.email ? query.email : "@email",
+          "address": "@city(true)",
+          "createTime": "@date @time",
+          "status|1": [0, 1],
+          "avatar": "@image(100x100,@color,@cname)"
+        }],
+        "pageNum": Number(query.pageNum),
+        "pageSize": Number(query.pageSize),
+        "total": 2000
+      })
+    } else {
+      return Mock.mock({
+        "datalist|10": [{
+          "id": "@string(number,20)",
+          "username": query.username ? query.username : "@cname",
+          "gender": query.gender ? query.gender : "@integer(1, 2)",
+          "age|15-30": 1,
+          "idCard": query.idCard ? query.idCard : "@id",
+          "email": query.email ? query.email : "@email",
+          "address": "@city(true)",
+          "createTime": "@date @time",
+          "status|1": [0, 1],
+          "avatar": "@image(100x100,@color,@cname)",
+        }],
+        "pageNum": Number(query.pageNum),
+        "pageSize": Number(query.pageSize),
+        "total": 2000
+      })
+    }
+
+  },
+  "msg": "成功"
+}
