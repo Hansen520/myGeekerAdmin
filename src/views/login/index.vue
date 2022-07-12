@@ -1,20 +1,22 @@
 <template>
 	<div class="login-container flx-center">
 		<div class="login-box">
-			<div class="login-left">😊</div>
-		</div>
-		<div class="login-form" style="margin-left: -300px">
-			<div class="login-logo">
-				<img src="" alt="" class="login-icon" />
-				<p class="login-text">登入页面</p>
+			<div class="login-left">
+				<img src="@/assets/images/login_left0.png" alt="login" />
 			</div>
-			<LoginForm ref="loginRef" :age="'20'" :addredd="['杭州河坊街', '北京恭亲王府']" :obj="obj"></LoginForm>
+			<div class="login-form">
+				<div class="login-logo">
+					<img class="login-icon" src="@/assets/images/logo.svg" alt="" />
+					<p class="login-text">登入页面</p>
+				</div>
+				<LoginForm ref="loginRef" :age="'20'" :addredd="['杭州河坊街', '北京恭亲王府']" :obj="obj"></LoginForm>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts" name="login">
-import { ref, reactive, provide } from "vue";
+import { ref, reactive } from "vue";
 import LoginForm from "./components/LoginForm.vue";
 import { LoginFormExpose } from "./interface/index";
 import { Login } from "@/api/interface/index";

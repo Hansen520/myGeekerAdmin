@@ -17,12 +17,14 @@
 	</el-form>
 	<div class="login-btn">
 		<el-button :icon="CircleClose" round size="large" @click="resetForm(loginFormRef)">重置</el-button>
-		<el-button :icon="UserFilled" :loading="loading" round size="large" type="primary" @click="login(loginFormRef)"> 登录 </el-button>
+		<el-button :icon="UserFilled" :loading="loading" round size="large" type="primary" @click="login(loginFormRef)">
+			登录
+		</el-button>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, inject, onMounted } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { Login } from "@/api/interface";
 import { CircleClose, UserFilled } from "@element-plus/icons-vue";
