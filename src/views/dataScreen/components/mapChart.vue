@@ -109,8 +109,8 @@ const initChart = (data: any = []): ECharts => {
 				effect: {
 					show: true,
 					period: 6,
-					trailLength: 0.7,
-					color: "red", //arrow箭头的颜色
+					trailLength: 0.9,
+					color: "green", //arrow箭头的颜色
 					symbolSize: 3
 				},
 				lineStyle: {
@@ -169,8 +169,16 @@ nextTick(() => {
 			fromName: "北京",
 			toName: "广州",
 			coords: [
-				[116.4551, 40.2539],
+				[121.4648, 31.2891],
 				[113.5107, 23.2196]
+			]
+		},
+		{
+			fromName: "西藏",
+			toName: "黑龙江",
+			coords: [
+				[91.11, 29.76],
+				[133.05, 46.33]
 			]
 		},
 		{

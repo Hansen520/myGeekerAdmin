@@ -73,7 +73,7 @@
 						</div>
 						<!-- chart -->
 						<div class="dataScreen-main-chart">
-							<!-- <HotPlateChart ref="HotPlateRef" /> -->
+							<HotPlateChart ref="HotPlateRef" />
 						</div>
 					</div>
 					<div class="dataScreen-center">
@@ -83,7 +83,7 @@
 						</div>
 						<!-- chart -->
 						<div class="dataScreen-main-chart">
-							<!-- <AnnualUseChart ref="AnnualUseRef" /> -->
+							<AnnualUseChart ref="AnnualUseRef" />
 						</div>
 					</div>
 					<div class="dataScreen-bottom">
@@ -103,10 +103,13 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
+import { ECharts } from "echarts";
+import { ref, onMounted, reactive } from "vue";
 import RealTimeAccessChart from "./components/RealTimeAccessChart.vue";
 import MaleFemaleRatioChart from "./components/MaleFemaleRatioChart.vue";
 import mapChart from "./components/mapChart.vue";
+import HotPlateChart from "./components/HotPlateChart.vue";
+import AnnualUseChart from "./components/AnnualUseChart.vue";
 /* 获取最外层盒子 */
 const dataScreenRef = ref<HTMLElement | null>(null);
 onMounted(() => {
@@ -116,6 +119,8 @@ onMounted(() => {
 		dataScreenRef.value.style.width = "1920px";
 		dataScreenRef.value.style.height = "1080px";
 	}
+	/* 初始化echarts */
+	initCharts();
 	window.addEventListener("resize", resize);
 });
 
@@ -131,6 +136,50 @@ const resize = () => {
 	if (dataScreenRef.value) {
 		dataScreenRef.value.style.transform = `scale(${getScale()}) translate(-50%, -50%)`;
 	}
+};
+let annualData = [
+	{
+		label: new Date().getFullYear() - 2 + "年",
+		value: ["184", "90", "120", "0", "30", "100", "80", "40", "20", "510", "350", "180"]
+	},
+	{
+		label: new Date().getFullYear() - 1 + "年",
+		value: ["118", "509", "366", "162", "380", "123", "321", "158", "352", "474", "154", "22"]
+	},
+	{
+		label: new Date().getFullYear() + "年",
+		value: ["548", "259", "113", "90", "69", "512", "23", "49", "28", "420", "313", "156"]
+	}
+];
+/* 声明echarts实例 */
+interface ChartProps {
+	[key: string]: ECharts | null;
+}
+const dataScreen: ChartProps = reactive({
+	chart1: null,
+	chart2: null,
+	chart3: null,
+	chart4: null,
+	chart5: null,
+	chart6: null,
+	chart7: null,
+	mapChart: null
+});
+/* 获取子组件的ref */
+interface ChartExpose {
+	initChart: (params: any) => ECharts;
+}
+const AnnualUseRef = ref<ChartExpose>();
+const RealTimeAccessRef = ref<ChartExpose>();
+/* 初始化Echarts */
+const initCharts = (): void => {
+	dataScreen.chart1 = RealTimeAccessRef.value?.initChart(0.5) as ECharts;
+	dataScreen.chart3 = AnnualUseRef.value?.initChart({
+		data: annualData,
+		unit: annualData.map(val => val.label),
+		columns: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+		colors: ["#FFA600", "#007AFE", "#FF4B7A"]
+	}) as ECharts;
 };
 </script>
 
